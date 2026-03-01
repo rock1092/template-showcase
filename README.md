@@ -34,6 +34,8 @@ Premium local business demo platform built with one unified design system and ni
 - `app/demo/[slug]/twitter-image.tsx`: niche Twitter image generation
 - `app/api/crm-webhook/route.ts`: webhook forwarder for CRM lead intake
 - `lib/analytics.ts`: reusable CTA and form event tracking helper
+- `data/niche-visuals.ts`: per-niche color systems + visual style tokens
+- `lib/pixabay.ts`: server-side Pixabay photo fetching with fallback images
 
 This setup keeps every niche aligned to one style system while allowing content-only customization.
 
@@ -57,6 +59,7 @@ Required/optional keys:
 - `NEXT_PUBLIC_GA_ID` (optional, enables Google Analytics)
 - `CRM_WEBHOOK_URL` (optional, forwards lead payloads to your CRM)
 - `CRM_WEBHOOK_SECRET` (optional, sent as `x-webhook-secret` header)
+- `PIXABAY_API_KEY` (optional, enables real niche work photos from Pixabay)
 
 3. Run development server
 

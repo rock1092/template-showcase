@@ -3,14 +3,30 @@ import { DemoTemplate } from "@/types/template";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LeadForm } from "@/components/demo/lead-form";
+import Image from "next/image";
+import { NicheVisualTheme } from "@/data/niche-visuals";
+import { WorkPhoto } from "@/lib/pixabay";
+import { CSSProperties } from "react";
 
 interface DemoTemplatePageProps {
   template: DemoTemplate;
+  theme: NicheVisualTheme;
+  workPhotos: WorkPhoto[];
 }
 
-export function DemoTemplatePage({ template }: DemoTemplatePageProps) {
+export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePageProps) {
+  const themedVars = {
+    "--brand": theme.brand,
+    "--brand-strong": theme.brandStrong,
+    "--accent": theme.accent,
+    "--radius-card": theme.radiusCard,
+  } as CSSProperties;
+
   return (
-    <>
+    <div
+      style={themedVars}
+      className="min-h-screen"
+    >
       <main className="page-shell pb-28 pt-6 md:pb-16">
         <nav className="glass-panel sticky top-4 z-30 mb-8 flex items-center justify-between rounded-[var(--radius-pill)] px-4 py-3 sm:px-6">
           <Link href="/" className="text-sm font-semibold tracking-wide text-brand-strong">
@@ -29,7 +45,12 @@ export function DemoTemplatePage({ template }: DemoTemplatePageProps) {
           </div>
         </nav>
 
-        <section className="glass-panel reveal-up overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] p-6 sm:p-10">
+        <section
+          className="glass-panel reveal-up overflow-hidden rounded-[calc(var(--radius-card)+0.5rem)] p-6 sm:p-10"
+          style={{
+            backgroundImage: `radial-gradient(circle at 4% 4%, ${theme.glow}, transparent 36%), linear-gradient(135deg, ${theme.bgStart}, ${theme.bgEnd})`,
+          }}
+        >
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div className="space-y-6">
               <p className="inline-flex rounded-[var(--radius-pill)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.13em] text-brand-strong">
@@ -63,6 +84,25 @@ export function DemoTemplatePage({ template }: DemoTemplatePageProps) {
                 stays vertical-specific.
               </p>
             </aside>
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <div className="grid gap-4 sm:grid-cols-3">
+            {workPhotos.slice(0, 3).map((photo, index) => (
+              <figure key={photo.url} className="surface-card overflow-hidden rounded-[var(--radius-card)]">
+                <div className="relative h-52 w-full">
+                  <Image
+                    src={photo.url}
+                    alt={photo.alt || `${template.niche} project image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
+                <figcaption className="px-4 py-3 text-xs text-muted">{photo.credit}</figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
@@ -117,21 +157,48 @@ export function DemoTemplatePage({ template }: DemoTemplatePageProps) {
             description="Each card keeps identical spacing and styling while content shifts per niche."
           />
           <div className="grid gap-4 md:grid-cols-2">
-            {template.beforeAfter.map((item) => (
+            {template.beforeAfter.map((item, index) => {
+              const beforePhoto = workPhotos[(index * 2) % workPhotos.length];
+              const afterPhoto = workPhotos[(index * 2 + 1) % workPhotos.length];
+
+              return (
               <article key={item.title} className="surface-card rounded-[var(--radius-card)] p-6">
                 <h3 className="text-xl font-semibold">{item.title}</h3>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl border border-dashed border-line bg-slate-50 p-4">
+                  <div className="overflow-hidden rounded-xl border border-dashed border-line bg-slate-50">
+                    <div className="relative h-36 w-full">
+                      <Image
+                        src={beforePhoto.url}
+                        alt={beforePhoto.alt || `${template.niche} before project image`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 30vw"
+                      />
+                    </div>
+                    <div className="p-4">
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">Before</p>
                     <p className="mt-2 text-sm text-foreground">{item.before}</p>
+                    </div>
                   </div>
-                  <div className="rounded-xl border border-brand/30 bg-brand/10 p-4">
+                  <div className="overflow-hidden rounded-xl border border-brand/30 bg-brand/10">
+                    <div className="relative h-36 w-full">
+                      <Image
+                        src={afterPhoto.url}
+                        alt={afterPhoto.alt || `${template.niche} after project image`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 30vw"
+                      />
+                    </div>
+                    <div className="p-4">
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-strong">After</p>
                     <p className="mt-2 text-sm text-foreground">{item.after}</p>
+                    </div>
                   </div>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -187,6 +254,6 @@ export function DemoTemplatePage({ template }: DemoTemplatePageProps) {
           </Link>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

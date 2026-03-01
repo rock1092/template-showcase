@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DemoTemplatePage } from "@/components/demo/demo-template-page";
 import { getTemplateBySlug, getTemplateSlugs } from "@/data/templates";
+import { getNicheVisual } from "@/data/niche-visuals";
+import { getWorkPhotos } from "@/lib/pixabay";
 
 interface DemoPageProps {
   params: Promise<{ slug: string }>;
@@ -58,6 +60,9 @@ export default async function DemoPage({ params }: DemoPageProps) {
   if (!template) {
     notFound();
   }
+
+  const visual = getNicheVisual(template.slug);
+  const workPhotos = await getWorkPhotos(template.slug);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://template-showcase.netlify.app";
   const canonicalUrl = `${siteUrl}/demo/${template.slug}`;
@@ -118,7 +123,7 @@ export default async function DemoPage({ params }: DemoPageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <DemoTemplatePage template={template} />
+      <DemoTemplatePage template={template} theme={visual} workPhotos={workPhotos} />
     </>
   );
 }

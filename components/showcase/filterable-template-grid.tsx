@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { DemoTemplate } from "@/types/template";
 import { Button } from "@/components/ui/button";
+import { getNicheVisual } from "@/data/niche-visuals";
 
 interface FilterableTemplateGridProps {
   templates: DemoTemplate[];
@@ -48,7 +49,11 @@ export function FilterableTemplateGrid({ templates, filters }: FilterableTemplat
           <article
             key={template.slug}
             className="surface-card reveal-up flex rounded-[var(--radius-card)] p-6"
-            style={{ animationDelay: `${index * 70}ms` }}
+            style={{
+              animationDelay: `${index * 70}ms`,
+              borderTop: `4px solid ${getNicheVisual(template.slug).brand}`,
+              backgroundImage: `linear-gradient(180deg, ${getNicheVisual(template.slug).bgStart} 0%, #ffffff 38%)`,
+            }}
           >
             <div className="flex flex-1 flex-col gap-4">
               <div className="flex items-center justify-between">
