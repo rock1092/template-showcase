@@ -22,8 +22,8 @@ export function FilterableTemplateGrid({ templates, filters }: FilterableTemplat
   }, [activeFilter, templates]);
 
   return (
-    <section className="space-y-7">
-      <div className="flex flex-wrap gap-3">
+    <section className="space-y-8">
+      <div className="flex flex-wrap gap-3 rounded-[var(--radius-card)] border border-line bg-white/80 p-3">
         {filters.map((filter) => {
           const isActive = filter === activeFilter;
 
@@ -32,9 +32,9 @@ export function FilterableTemplateGrid({ templates, filters }: FilterableTemplat
               key={filter}
               type="button"
               onClick={() => setActiveFilter(filter)}
-              className={`rounded-[var(--radius-pill)] border px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-[var(--radius-pill)] border px-4 py-2 text-sm font-medium transition-all ${
                 isActive
-                  ? "border-brand bg-brand text-white"
+                  ? "border-brand bg-gradient-to-r from-brand to-brand-strong text-white shadow-[var(--shadow-sm)]"
                   : "border-line bg-white text-foreground hover:border-brand/35 hover:text-brand-strong"
               }`}
             >
@@ -44,15 +44,15 @@ export function FilterableTemplateGrid({ templates, filters }: FilterableTemplat
         })}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visibleTemplates.map((template, index) => (
           <article
             key={template.slug}
-            className="surface-card reveal-up flex rounded-[var(--radius-card)] p-6"
+            className="surface-card reveal-up elevate-card flex rounded-[var(--radius-card)] p-6"
             style={{
               animationDelay: `${index * 70}ms`,
               borderTop: `4px solid ${getNicheVisual(template.slug).brand}`,
-              backgroundImage: `linear-gradient(180deg, ${getNicheVisual(template.slug).bgStart} 0%, #ffffff 38%)`,
+              backgroundImage: `linear-gradient(180deg, ${getNicheVisual(template.slug).bgStart} 0%, #ffffff 34%)`,
             }}
           >
             <div className="flex flex-1 flex-col gap-4">
@@ -64,6 +64,9 @@ export function FilterableTemplateGrid({ templates, filters }: FilterableTemplat
               </div>
               <h3 className="text-2xl font-semibold leading-tight">{template.heroTitle}</h3>
               <p className="text-sm text-muted">{template.heroSubtitle}</p>
+              <p className="rounded-xl border border-line bg-white/70 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-brand-strong">
+                Includes hero, trust strip, testimonials, gallery, and lead form.
+              </p>
               <div className="mt-auto">
                 <Button
                   href={`/demo/${template.slug}`}

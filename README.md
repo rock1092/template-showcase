@@ -86,6 +86,34 @@ npm run build
 - Lead submissions emit `lead_form_submit` events.
 - When `NEXT_PUBLIC_GA_ID` is set, events are forwarded to `gtag` automatically.
 
+## Premium UI Refactor Changelog
+
+- Added centralized design tokens in `app/globals.css` for spacing, radius, shadows, and typography scale.
+- Upgraded global typography pairing to `Plus Jakarta Sans + Manrope` in `app/layout.tsx`.
+- Rebuilt demo pages with luxury hero composition, trust strip, repeated CTA bands, richer section rhythm, and animated reveals using Framer Motion.
+- Implemented transparent-to-solid sticky navbar behavior on scroll.
+- Elevated service/testimonial/gallery/FAQ/form cards with depth, hover polish, and stronger conversion hierarchy.
+- Upgraded lead form into a two-step premium flow while preserving existing Netlify + CRM submission logic.
+- Added template personality layers by niche slug (elegant realtor, industrial construction, technical HVAC, vibrant painting, etc.) without changing routing/data architecture.
+- Improved accessibility with stronger focus-visible states and reduced-motion-safe behavior.
+
+## Before/After Screenshots
+
+- Before screenshots: `screenshots/before/*.png`
+- After screenshots: `screenshots/after/*.png`
+
+Captured templates:
+
+- `realtor`
+- `construction`
+- `hvac`
+- `painting`
+- `plumbing`
+- `landscaping`
+- `cleaning`
+- `electrical`
+- `roofing`
+
 ## Add a New Niche (under 10 minutes)
 
 1. Create `data/niches/new-niche.ts` and export a `DemoTemplate` object.

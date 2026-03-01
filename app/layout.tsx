@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Manrope, Sora } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const sora = Sora({
+const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-heading",
   subsets: ["latin"],
 });
@@ -55,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} ${manrope.variable} antialiased`}>
+      <body className={`${plusJakarta.variable} ${manrope.variable} antialiased`}>
         {children}
       </body>
       {gaId ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" /> : null}

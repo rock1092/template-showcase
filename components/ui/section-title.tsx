@@ -6,10 +6,12 @@ interface SectionTitleProps {
 
 export function SectionTitle({ kicker, title, description }: SectionTitleProps) {
   return (
-    <div className="max-w-2xl space-y-4">
-      <p className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-strong">{kicker}</p>
-      <h2 className="text-3xl font-semibold leading-tight text-foreground sm:text-4xl">{title}</h2>
-      {description ? <p className="text-base text-muted sm:text-lg">{description}</p> : null}
+    <div className="max-w-3xl space-y-4">
+      <p className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-brand/25 bg-brand/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-brand-strong">
+        {kicker}
+      </p>
+      <h2 className="text-[var(--font-size-3xl)] font-semibold text-foreground">{title}</h2>
+      {description ? <p className="max-w-2xl text-base text-muted sm:text-lg">{description}</p> : null}
     </div>
   );
 }
