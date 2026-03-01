@@ -1,7 +1,12 @@
 import { NicheSlug } from "@/types/template";
 
 export interface NicheVisualTheme {
-  layoutVariant: "executive" | "bold" | "editorial";
+  brandName: string;
+  announcement: string;
+  navItems: [string, string, string];
+  headerMode: "solid" | "floating" | "minimal";
+  heroMode: "immersive" | "split" | "stacked" | "magazine";
+  quoteMode: "contrast" | "glass" | "stripe";
   brand: string;
   brandStrong: string;
   accent: string;
@@ -14,7 +19,12 @@ export interface NicheVisualTheme {
 
 export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   realtor: {
-    layoutVariant: "executive",
+    brandName: "Urban Peak Realty",
+    announcement: "New luxury inventory released this week",
+    navItems: ["Listings", "Neighborhoods", "Sell Faster"],
+    headerMode: "floating",
+    heroMode: "immersive",
+    quoteMode: "glass",
     brand: "#3366CC",
     brandStrong: "#1E3A8A",
     accent: "#F59E0B",
@@ -25,7 +35,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "luxury home exterior real estate sold house",
   },
   construction: {
-    layoutVariant: "bold",
+    brandName: "North Forge Build",
+    announcement: "Preconstruction planning slots open for Q2",
+    navItems: ["Build Process", "Portfolio", "Bid Request"],
+    headerMode: "solid",
+    heroMode: "split",
+    quoteMode: "contrast",
     brand: "#D97706",
     brandStrong: "#92400E",
     accent: "#0EA5E9",
@@ -36,7 +51,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "construction site contractor renovation project",
   },
   hvac: {
-    layoutVariant: "bold",
+    brandName: "Desert Air Pro",
+    announcement: "24/7 emergency dispatch active tonight",
+    navItems: ["Emergency Repair", "Maintenance", "Financing"],
+    headerMode: "solid",
+    heroMode: "split",
+    quoteMode: "contrast",
     brand: "#0EA5E9",
     brandStrong: "#075985",
     accent: "#F97316",
@@ -47,7 +67,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "hvac technician air conditioning repair home service",
   },
   painting: {
-    layoutVariant: "editorial",
+    brandName: "Brightline Painting",
+    announcement: "Color strategy sessions available this month",
+    navItems: ["Color Studio", "Case Studies", "Book Estimate"],
+    headerMode: "minimal",
+    heroMode: "magazine",
+    quoteMode: "stripe",
     brand: "#DB2777",
     brandStrong: "#9D174D",
     accent: "#14B8A6",
@@ -58,7 +83,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "house painting interior wall painter renovation",
   },
   plumbing: {
-    layoutVariant: "executive",
+    brandName: "ClearFlow Plumbing",
+    announcement: "No dispatch fee for urgent leaks this week",
+    navItems: ["Emergency", "Drain + Sewer", "Water Heater"],
+    headerMode: "floating",
+    heroMode: "stacked",
+    quoteMode: "glass",
     brand: "#2563EB",
     brandStrong: "#1E40AF",
     accent: "#06B6D4",
@@ -69,7 +99,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "plumber pipe repair sink leak service",
   },
   landscaping: {
-    layoutVariant: "editorial",
+    brandName: "Verdant Edge Co",
+    announcement: "Spring backyard transformations now booking",
+    navItems: ["Design Build", "Maintenance", "Outdoor Living"],
+    headerMode: "minimal",
+    heroMode: "magazine",
+    quoteMode: "stripe",
     brand: "#16A34A",
     brandStrong: "#166534",
     accent: "#F59E0B",
@@ -80,7 +115,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "landscaping garden design backyard lawn makeover",
   },
   cleaning: {
-    layoutVariant: "executive",
+    brandName: "Luminous Cleaning",
+    announcement: "Recurring plans now include free deep reset",
+    navItems: ["Home", "Commercial", "Recurring Plans"],
+    headerMode: "floating",
+    heroMode: "stacked",
+    quoteMode: "glass",
     brand: "#0EA5A4",
     brandStrong: "#115E59",
     accent: "#F43F5E",
@@ -91,7 +131,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "professional cleaning service home office cleaning",
   },
   electrical: {
-    layoutVariant: "bold",
+    brandName: "VoltCraft Electric",
+    announcement: "Panel upgrade crew ready for same-week installs",
+    navItems: ["Panel Upgrades", "EV Charging", "Safety Checks"],
+    headerMode: "solid",
+    heroMode: "split",
+    quoteMode: "contrast",
     brand: "#7C3AED",
     brandStrong: "#4C1D95",
     accent: "#F59E0B",
@@ -102,7 +147,12 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
     pixabayQuery: "electrician wiring electrical panel installation",
   },
   roofing: {
-    layoutVariant: "bold",
+    brandName: "Elevation Roofing",
+    announcement: "Storm response line open now",
+    navItems: ["Storm Damage", "Inspections", "Insurance Help"],
+    headerMode: "solid",
+    heroMode: "immersive",
+    quoteMode: "contrast",
     brand: "#DC2626",
     brandStrong: "#991B1B",
     accent: "#0EA5E9",
