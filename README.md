@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Template Showcase Platform
 
-## Getting Started
+Premium local business demo platform built with one unified design system and niche-specific content data.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4
+- Component-driven architecture with shared UI and data configs
+- SEO-ready metadata + schema + sitemap + robots
+- Netlify deploy ready with form handling
+
+## Included Demo Routes
+
+- `/demo/realtor`
+- `/demo/construction`
+- `/demo/hvac`
+- `/demo/painting`
+- `/demo/plumbing`
+- `/demo/landscaping`
+- `/demo/cleaning`
+- `/demo/electrical`
+- `/demo/roofing`
+
+## Architecture
+
+- `data/templates.ts`: demo registry + filters + helper functions
+- `data/niches/*.ts`: one config per niche
+- `types/template.ts`: schema for all niche config objects
+- `components/showcase/*`: homepage template grid and filters
+- `components/demo/*`: shared conversion sections rendered from niche data
+- `app/demo/[slug]/page.tsx`: dynamic route generation + metadata + JSON-LD
+- `app/demo/[slug]/opengraph-image.tsx`: niche OG image generation
+- `app/demo/[slug]/twitter-image.tsx`: niche Twitter image generation
+- `app/api/crm-webhook/route.ts`: webhook forwarder for CRM lead intake
+- `lib/analytics.ts`: reusable CTA and form event tracking helper
+
+This setup keeps every niche aligned to one style system while allowing content-only customization.
+
+## Local Setup
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Configure environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Required/optional keys:
+
+- `NEXT_PUBLIC_SITE_URL` (required for canonical/sitemap)
+- `NEXT_PUBLIC_GA_ID` (optional, enables Google Analytics)
+- `CRM_WEBHOOK_URL` (optional, forwards lead payloads to your CRM)
+- `CRM_WEBHOOK_SECRET` (optional, sent as `x-webhook-secret` header)
+
+3. Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Netlify Deployment
 
-## Learn More
+- `netlify.toml` is included with Next.js plugin and build command.
+- Netlify forms are enabled on each demo route lead form (`data-netlify="true"`).
+- Form submissions redirect to `/thank-you`.
+- The lead form also posts in parallel to `/api/crm-webhook` for CRM ingestion.
 
-To learn more about Next.js, take a look at the following resources:
+## Analytics and Conversion Tracking
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- CTA clicks emit `cta_click` events.
+- Lead submissions emit `lead_form_submit` events.
+- When `NEXT_PUBLIC_GA_ID` is set, events are forwarded to `gtag` automatically.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Add a New Niche (under 10 minutes)
 
-## Deploy on Vercel
+1. Create `data/niches/new-niche.ts` and export a `DemoTemplate` object.
+2. Import and register it in `data/templates.ts`.
+3. Ensure `slug`, `seo`, `services`, `faq`, and `contact` fields are complete.
+4. Run `npm run build` to verify static params and metadata generation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The route will auto-generate at `/demo/<slug>`.

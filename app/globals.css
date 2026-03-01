@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f7fb;
+  --background-elevated: #ffffff;
+  --foreground: #10223b;
+  --muted: #60728a;
+  --brand: #1f7ae0;
+  --brand-strong: #0f4c95;
+  --accent: #24c4a4;
+  --line: #d6e1ee;
+  --radius-card: 1.25rem;
+  --radius-pill: 9999px;
+  --shadow-soft: 0 12px 30px -18px rgba(15, 34, 59, 0.35);
+  --shadow-glass: 0 12px 34px -18px rgba(22, 71, 129, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--line);
 }
 
 body {
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), sans-serif;
+  background-image:
+    radial-gradient(circle at 8% 10%, rgba(31, 122, 224, 0.12), transparent 28%),
+    radial-gradient(circle at 90% 2%, rgba(36, 196, 164, 0.13), transparent 24%),
+    linear-gradient(180deg, #f6f9fe 0%, #edf3fb 48%, #f5f8fd 100%);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.page-shell {
+  margin-inline: auto;
+  width: min(1120px, calc(100% - 2rem));
+}
+
+.glass-panel {
+  background: color-mix(in srgb, #ffffff 82%, #eaf2fb 18%);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, #ffffff 58%, #bfd1e8 42%);
+  box-shadow: var(--shadow-glass);
+}
+
+.surface-card {
+  background: var(--background-elevated);
+  border: 1px solid color-mix(in srgb, #ffffff 32%, #c7d8ea 68%);
+  box-shadow: var(--shadow-soft);
+}
+
+.gradient-title {
+  background: linear-gradient(110deg, #0f4c95 0%, #1f7ae0 46%, #22b39a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.reveal-up {
+  animation: revealUp 700ms ease-out both;
+}
+
+@keyframes revealUp {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
