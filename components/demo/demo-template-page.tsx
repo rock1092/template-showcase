@@ -43,7 +43,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
                 : "border-b border-line bg-transparent"
           }`}
         >
-          <Link href="/" className="text-sm font-semibold tracking-wide text-brand-strong">
+          <Link href="/" className="brand-mark text-sm font-semibold tracking-wide text-brand-strong">
             {theme.brandName}
           </Link>
           <div className="hidden items-center gap-4 sm:flex">
@@ -164,13 +164,23 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </section>
         )}
 
+        <section className="bar-shell mt-6 overflow-hidden rounded-[var(--radius-pill)] border border-line bg-white/90 px-3 py-2">
+          <div className="bar-track flex flex-wrap items-center gap-2 sm:gap-3">
+            {template.trustBadges.slice(0, 4).map((badge) => (
+              <span key={badge} className="bar-pill inline-flex items-center rounded-[var(--radius-pill)] border border-line px-3 py-1 text-xs font-semibold uppercase tracking-[0.09em] text-brand-strong">
+                {badge}
+              </span>
+            ))}
+          </div>
+        </section>
+
         <section id="services" className="services-shell mt-14 space-y-6">
           <SectionTitle kicker="Services" title={`Signature ${template.niche} Offer Stack`} description="Same conversion logic. Distinct look, mood, and layout behavior." />
           <div className="services-grid grid gap-4 md:grid-cols-3">
             {template.services.map((service, index) => (
               <article
                 key={service.title}
-                className={`surface-card p-6 ${
+                className={`service-card surface-card p-6 ${
                   theme.heroMode === "magazine"
                     ? "rounded-none border-l-4 border-brand"
                     : index % 2 === 0
@@ -191,7 +201,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
             {template.trustBadges.map((badge, index) => (
               <div
                 key={badge}
-                className="flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium"
+                className="trust-card flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium"
                 style={{
                   background: index % 2 === 0 ? "#ffffff" : `color-mix(in srgb, ${theme.brand} 10%, #ffffff 90%)`,
                   borderColor: `color-mix(in srgb, ${theme.brand} 26%, #d3e2f1 74%)`,
@@ -210,7 +220,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           <SectionTitle kicker="Testimonials" title="Client-Led Credibility" />
           <div className="grid gap-4 md:grid-cols-2">
             {template.testimonials.map((item) => (
-              <blockquote key={item.name} className="surface-card rounded-[var(--radius-card)] p-6">
+              <blockquote key={item.name} className="testimonial-card surface-card rounded-[var(--radius-card)] p-6">
                 <p className="text-base text-foreground">&quot;{item.quote}&quot;</p>
                 <footer className="mt-4 text-sm text-muted">
                   <span className="font-semibold text-foreground">{item.name}</span> - {item.role}
@@ -228,7 +238,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
               const afterPhoto = workPhotos[(index * 2 + 1) % workPhotos.length] || altPhoto;
 
               return (
-                <article key={item.title} className="surface-card rounded-[var(--radius-card)] p-6">
+                <article key={item.title} className="gallery-card surface-card rounded-[var(--radius-card)] p-6">
                   <h3 className="text-xl font-semibold">{item.title}</h3>
                   <div className="mt-5 grid gap-3 sm:grid-cols-2">
                     <div className="overflow-hidden rounded-xl border border-dashed border-line bg-slate-50">
@@ -260,7 +270,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           <SectionTitle kicker="FAQ" title="Final Buying Questions" />
           <div className="space-y-3">
             {template.faq.map((item) => (
-              <details key={item.question} className="surface-card rounded-2xl px-5 py-4">
+              <details key={item.question} className="faq-item surface-card rounded-2xl px-5 py-4">
                 <summary className="cursor-pointer list-none text-base font-semibold text-foreground">{item.question}</summary>
                 <p className="mt-3 text-sm text-muted">{item.answer}</p>
               </details>
@@ -270,17 +280,17 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
 
         <section className="quote-shell mt-14">
           {theme.quoteMode === "contrast" ? (
-            <div className="rounded-[var(--radius-card)] p-8 text-white" style={{ background: `linear-gradient(120deg, ${theme.brandStrong}, ${theme.brand})` }}>
+            <div className="quote-block rounded-[var(--radius-card)] p-8 text-white" style={{ background: `linear-gradient(120deg, ${theme.brandStrong}, ${theme.brand})` }}>
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/80">Request Quote Fast</p>
               <h2 className="mt-2 text-3xl font-semibold">Send details now, get a strategic response quickly.</h2>
             </div>
           ) : theme.quoteMode === "stripe" ? (
-            <div className="rounded-[var(--radius-card)] border border-line bg-white p-8" style={{ backgroundImage: `repeating-linear-gradient(120deg, ${theme.bgStart} 0 18px, #ffffff 18px 36px)` }}>
+            <div className="quote-block rounded-[var(--radius-card)] border border-line bg-white p-8" style={{ backgroundImage: `repeating-linear-gradient(120deg, ${theme.bgStart} 0 18px, #ffffff 18px 36px)` }}>
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-strong">Request Quote</p>
               <h2 className="mt-2 text-3xl font-semibold">A design-forward inquiry flow built for conversion.</h2>
             </div>
           ) : (
-            <div className="glass-panel rounded-[var(--radius-card)] p-8">
+            <div className="quote-block glass-panel rounded-[var(--radius-card)] p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-brand-strong">Request Quote</p>
               <h2 className="mt-2 text-3xl font-semibold">Tell us your project and timeline in 60 seconds.</h2>
             </div>
