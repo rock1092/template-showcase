@@ -15,12 +15,22 @@ interface DemoTemplatePageProps {
 }
 
 export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePageProps) {
+  const variant = theme.layoutVariant;
+  const heroPhoto = workPhotos[0];
+
   const themedVars = {
     "--brand": theme.brand,
     "--brand-strong": theme.brandStrong,
     "--accent": theme.accent,
     "--radius-card": theme.radiusCard,
   } as CSSProperties;
+
+  const sectionCardClass =
+    variant === "editorial"
+      ? "surface-card rounded-none border-l-4 border-brand p-6"
+      : variant === "bold"
+        ? "surface-card rounded-[var(--radius-card)] border-2 border-brand/20 p-6"
+        : "surface-card rounded-[var(--radius-card)] p-6";
 
   return (
     <div
@@ -51,40 +61,64 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
             backgroundImage: `radial-gradient(circle at 4% 4%, ${theme.glow}, transparent 36%), linear-gradient(135deg, ${theme.bgStart}, ${theme.bgEnd})`,
           }}
         >
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-            <div className="space-y-6">
-              <p className="inline-flex rounded-[var(--radius-pill)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.13em] text-brand-strong">
+          {variant === "editorial" ? (
+            <div className="space-y-6 text-center">
+              <p className="mx-auto inline-flex rounded-[var(--radius-pill)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.13em] text-brand-strong">
                 {template.niche} - {template.city}
               </p>
-              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">{template.heroTitle}</h1>
-              <p className="max-w-2xl text-base text-muted sm:text-lg">{template.heroSubtitle}</p>
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  href="#lead-form"
-                  trackingEvent="cta_click"
-                  trackingPayload={{ position: "hero_primary", slug: template.slug }}
-                >
+              <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">{template.heroTitle}</h1>
+              <p className="mx-auto max-w-3xl text-base text-muted sm:text-lg">{template.heroSubtitle}</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "hero_primary", slug: template.slug }}>
                   {template.primaryCta}
                 </Button>
-                <Button
-                  href="#gallery"
-                  variant="secondary"
-                  trackingEvent="cta_click"
-                  trackingPayload={{ position: "hero_secondary", slug: template.slug }}
-                >
+                <Button href="#gallery" variant="secondary" trackingEvent="cta_click" trackingPayload={{ position: "hero_secondary", slug: template.slug }}>
                   {template.secondaryCta}
                 </Button>
               </div>
+              {heroPhoto ? (
+                <div className="relative mx-auto mt-2 h-56 w-full max-w-4xl overflow-hidden rounded-[var(--radius-card)] border border-white/60">
+                  <Image src={heroPhoto.url} alt={heroPhoto.alt} fill className="object-cover" sizes="100vw" unoptimized />
+                </div>
+              ) : null}
             </div>
-            <aside className="surface-card rounded-[var(--radius-card)] p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-strong">Limited Offer</p>
-              <h2 className="mt-3 text-2xl font-semibold">{template.offerLabel}</h2>
-              <p className="mt-3 text-sm text-muted">
-                This section is shared across every niche template to keep conversion hierarchy consistent while the content
-                stays vertical-specific.
-              </p>
-            </aside>
-          </div>
+          ) : (
+            <div className={`grid gap-8 lg:items-center ${variant === "bold" ? "lg:grid-cols-[1fr_1fr]" : "lg:grid-cols-[1.15fr_0.85fr]"}`}>
+              <div className="space-y-6">
+                <p className="inline-flex rounded-[var(--radius-pill)] bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.13em] text-brand-strong">
+                  {template.niche} - {template.city}
+                </p>
+                <h1 className={`font-semibold leading-tight ${variant === "bold" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl"}`}>
+                  {template.heroTitle}
+                </h1>
+                <p className="max-w-2xl text-base text-muted sm:text-lg">{template.heroSubtitle}</p>
+                <div className="flex flex-wrap gap-3">
+                  <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "hero_primary", slug: template.slug }}>
+                    {template.primaryCta}
+                  </Button>
+                  <Button href="#gallery" variant="secondary" trackingEvent="cta_click" trackingPayload={{ position: "hero_secondary", slug: template.slug }}>
+                    {template.secondaryCta}
+                  </Button>
+                </div>
+              </div>
+              {variant === "bold" && heroPhoto ? (
+                <div className="surface-card overflow-hidden rounded-[var(--radius-card)] p-3">
+                  <div className="relative h-72 w-full overflow-hidden rounded-[calc(var(--radius-card)-0.3rem)]">
+                    <Image src={heroPhoto.url} alt={heroPhoto.alt} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" unoptimized />
+                  </div>
+                  <p className="mt-3 text-xs text-muted">{heroPhoto.credit}</p>
+                </div>
+              ) : (
+                <aside className="surface-card rounded-[var(--radius-card)] p-6">
+                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-strong">Limited Offer</p>
+                  <h2 className="mt-3 text-2xl font-semibold">{template.offerLabel}</h2>
+                  <p className="mt-3 text-sm text-muted">
+                    This section is shared across every niche template to keep conversion hierarchy consistent while the content stays vertical-specific.
+                  </p>
+                </aside>
+              )}
+            </div>
+          )}
         </section>
 
         <section className="mt-10">
@@ -98,6 +132,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    unoptimized
                   />
                 </div>
                 <figcaption className="px-4 py-3 text-xs text-muted">{photo.credit}</figcaption>
@@ -114,7 +149,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           />
           <div className="grid gap-4 md:grid-cols-3">
             {template.services.map((service) => (
-              <article key={service.title} className="surface-card rounded-[var(--radius-card)] p-6">
+              <article key={service.title} className={sectionCardClass}>
                 <h3 className="text-xl font-semibold">{service.title}</h3>
                 <p className="mt-3 text-sm text-muted">{service.description}</p>
               </article>
@@ -173,6 +208,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 30vw"
+                        unoptimized
                       />
                     </div>
                     <div className="p-4">
@@ -188,6 +224,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 30vw"
+                        unoptimized
                       />
                     </div>
                     <div className="p-4">

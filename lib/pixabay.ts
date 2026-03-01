@@ -2,6 +2,7 @@ import { NicheSlug } from "@/types/template";
 import { getNicheVisual } from "@/data/niche-visuals";
 
 interface PixabayHit {
+  largeImageURL?: string;
   webformatURL: string;
   tags: string;
   user: string;
@@ -53,7 +54,7 @@ export async function getWorkPhotos(slug: NicheSlug): Promise<WorkPhoto[]> {
 
     const data = (await response.json()) as PixabayResponse;
     const photos = data.hits.slice(0, 6).map((hit) => ({
-      url: hit.webformatURL,
+      url: hit.largeImageURL || hit.webformatURL,
       alt: hit.tags,
       credit: `Pixabay / ${hit.user}`,
     }));
