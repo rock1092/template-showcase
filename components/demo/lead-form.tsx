@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { NicheSlug } from "@/types/template";
 import { trackEvent } from "@/lib/analytics";
 
@@ -11,9 +12,12 @@ interface LeadFormProps {
 }
 
 export function LeadForm({ slug, niche, primaryCta }: LeadFormProps) {
+  const router = useRouter();
   const formName = `lead-${slug}`;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const payload = {
@@ -34,6 +38,22 @@ export function LeadForm({ slug, niche, primaryCta }: LeadFormProps) {
       sourcePath: payload.sourcePath,
     });
 
+    const netlifyPayload = new URLSearchParams();
+    netlifyPayload.set("form-name", formName);
+    netlifyPayload.set("template", niche);
+    netlifyPayload.set("name", payload.name);
+    netlifyPayload.set("phone", payload.phone);
+    netlifyPayload.set("email", payload.email);
+    netlifyPayload.set("message", payload.message);
+
+    await fetch("/__forms.html", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: netlifyPayload.toString(),
+    });
+
     void fetch("/api/crm-webhook", {
       method: "POST",
       headers: {
@@ -42,15 +62,13 @@ export function LeadForm({ slug, niche, primaryCta }: LeadFormProps) {
       body: JSON.stringify(payload),
       keepalive: true,
     });
+
+    router.push("/thank-you");
   }
 
   return (
     <form
       name={formName}
-      method="POST"
-      action="/thank-you"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
       className="surface-card rounded-[var(--radius-card)] p-6"
       onSubmit={handleSubmit}
     >
