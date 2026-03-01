@@ -60,6 +60,131 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
     [theme.navItems],
   );
 
+  function renderNav() {
+    const links = navLinks.map((item) => (
+      <a key={item.label} href={item.href} className="text-sm transition-colors hover:text-brand-strong">
+        {item.label}
+      </a>
+    ));
+
+    if (theme.navStyle === "luxury") {
+      return (
+        <nav className={`nav-shell nav-luxury sticky top-3 z-40 mb-8 flex items-center justify-between rounded-[var(--radius-pill)] px-4 py-3 sm:px-6 ${isScrolled ? "is-scrolled" : ""}`}>
+          <div className="flex items-center gap-3">
+            <span className="brand-crest inline-flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold tracking-[0.14em]">
+              {theme.logoMark}
+            </span>
+            <div>
+              <Link href="/" className="brand-mark text-sm font-semibold tracking-[0.08em] text-brand-strong">
+                {theme.brandName}
+              </Link>
+              <p className="hidden text-xs text-muted sm:block">{theme.brandTagline}</p>
+            </div>
+          </div>
+          <div className="hidden items-center gap-5 text-muted sm:flex">
+            {links}
+            <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
+              Private Consultation
+            </Button>
+          </div>
+        </nav>
+      );
+    }
+
+    if (theme.navStyle === "industrial") {
+      return (
+        <nav className={`nav-shell nav-industrial sticky top-3 z-40 mb-8 rounded-[var(--radius-lg)] border px-4 py-3 sm:px-6 ${isScrolled ? "is-scrolled" : ""}`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex rounded-md border px-2 py-1 text-xs font-bold tracking-[0.12em]">{theme.logoMark}</span>
+              <Link href="/" className="brand-mark text-sm font-semibold uppercase tracking-[0.08em]">
+                {theme.brandName}
+              </Link>
+            </div>
+            <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
+              Request Bid
+            </Button>
+          </div>
+          <div className="mt-3 hidden items-center gap-4 border-t border-white/20 pt-3 text-sm sm:flex">{links}</div>
+        </nav>
+      );
+    }
+
+    if (theme.navStyle === "technical") {
+      return (
+        <nav className={`nav-shell nav-technical sticky top-3 z-40 mb-8 rounded-[var(--radius-pill)] border px-4 py-3 sm:px-6 ${isScrolled ? "is-scrolled" : ""}`}>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand/12 text-xs font-bold">{theme.logoMark}</span>
+              <Link href="/" className="brand-mark text-sm font-semibold tracking-[0.04em]">
+                {theme.brandName}
+              </Link>
+            </div>
+            <div className="hidden items-center gap-2 sm:flex">
+              {navLinks.map((item) => (
+                <a key={item.label} href={item.href} className="rounded-[var(--radius-pill)] border border-line px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:border-brand/35 hover:text-brand-strong">
+                  {item.label}
+                </a>
+              ))}
+              <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
+                Diagnostic Quote
+              </Button>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    if (theme.navStyle === "editorial") {
+      return (
+        <nav className={`nav-shell nav-editorial sticky top-3 z-40 mb-8 border-b px-2 py-4 sm:px-1 ${isScrolled ? "is-scrolled" : ""}`}>
+          <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+            <p className="hidden text-xs uppercase tracking-[0.16em] text-muted sm:block">{theme.brandTagline}</p>
+            <Link href="/" className="brand-mark text-center text-sm font-semibold uppercase tracking-[0.18em] text-brand-strong">
+              {theme.brandName}
+            </Link>
+            <div className="hidden items-center justify-end gap-4 text-sm text-muted sm:flex">{links}</div>
+          </div>
+        </nav>
+      );
+    }
+
+    if (theme.navStyle === "storm") {
+      return (
+        <nav className={`nav-shell nav-storm sticky top-3 z-40 mb-8 rounded-[var(--radius-lg)] border px-4 py-3 sm:px-6 ${isScrolled ? "is-scrolled" : ""}`}>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/35 text-xs font-bold">{theme.logoMark}</span>
+              <div>
+                <Link href="/" className="brand-mark text-sm font-semibold tracking-[0.06em] text-white">
+                  {theme.brandName}
+                </Link>
+                <p className="hidden text-xs text-white/75 sm:block">{theme.brandTagline}</p>
+              </div>
+            </div>
+            <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
+              Emergency Estimate
+            </Button>
+          </div>
+        </nav>
+      );
+    }
+
+    return (
+      <nav className={`nav-shell sticky top-3 z-40 mb-8 flex items-center justify-between rounded-[var(--radius-pill)] border border-line bg-white/80 px-4 py-3 backdrop-blur sm:px-6 ${isScrolled ? "is-scrolled" : ""}`}>
+        <Link href="/" className="brand-mark text-sm font-semibold tracking-wide text-brand-strong">
+          {theme.brandName}
+        </Link>
+        <div className="hidden items-center gap-4 text-muted sm:flex">
+          {links}
+          <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
+            Request Estimate
+          </Button>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <div style={themedVars} className="demo-page min-h-screen" data-slug={template.slug}>
       <div
@@ -70,27 +195,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
       </div>
 
       <main className="page-shell demo-main pb-28 pt-4 md:pb-16">
-        <nav
-          className={`nav-shell sticky top-3 z-40 mb-8 flex items-center justify-between rounded-[var(--radius-pill)] px-4 py-3 transition-all duration-300 sm:px-6 ${
-            isScrolled
-              ? "border border-line bg-white/95 shadow-[var(--shadow-md)] backdrop-blur-lg"
-              : "border border-white/50 bg-white/65 backdrop-blur"
-          }`}
-        >
-          <Link href="/" className="brand-mark text-sm font-semibold tracking-wide text-brand-strong">
-            {theme.brandName}
-          </Link>
-          <div className="hidden items-center gap-4 sm:flex">
-            {navLinks.map((item) => (
-              <a key={item.label} href={item.href} className="text-sm text-muted transition-colors hover:text-brand-strong">
-                {item.label}
-              </a>
-            ))}
-            <Button href="#lead-form" trackingEvent="cta_click" trackingPayload={{ position: "nav", slug: template.slug }}>
-              Request Estimate
-            </Button>
-          </div>
-        </nav>
+        {renderNav()}
 
         <motion.section
           {...revealProps}
@@ -106,6 +211,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
               <p className="inline-flex rounded-[var(--radius-pill)] border border-white/70 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-brand-strong">
                 {template.niche} - {template.city}
               </p>
+              <p className="mt-3 text-sm font-medium text-brand-strong/90">{theme.brandTagline}</p>
               <h1 className="mt-4 text-[var(--font-size-4xl)] font-semibold text-foreground">{template.heroTitle}</h1>
               <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">{template.heroSubtitle}</p>
               <div className="mt-7 flex flex-wrap gap-3">

@@ -189,6 +189,60 @@ p {
   box-shadow: var(--shadow-sm);
 }
 
+.nav-shell {
+  transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease, transform 280ms ease;
+}
+
+.nav-shell.is-scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+.nav-luxury {
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.94), rgba(251, 244, 224, 0.84));
+  border: 1px solid rgba(192, 154, 77, 0.35);
+}
+
+.nav-luxury .brand-crest {
+  background: linear-gradient(135deg, #b88a3c, #f6e3b0);
+  color: #3e2e0e;
+  border: 1px solid rgba(102, 72, 22, 0.28);
+}
+
+.nav-industrial {
+  background: linear-gradient(140deg, #1e1f24, #2a2c33);
+  border-color: #4e5565;
+  color: #f6f8ff;
+}
+
+.nav-industrial .brand-mark,
+.nav-industrial a,
+.nav-industrial span {
+  color: #f5f8ff;
+}
+
+.nav-technical {
+  background: linear-gradient(100deg, rgba(14, 165, 233, 0.11), rgba(255, 255, 255, 0.94));
+  border-color: color-mix(in srgb, var(--brand) 30%, #c8d9ee 70%);
+}
+
+.nav-editorial {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  border-color: color-mix(in srgb, var(--brand) 20%, #c8d9ee 80%);
+}
+
+.nav-storm {
+  background: linear-gradient(135deg, #3a1010, #611515);
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+.nav-storm .brand-mark,
+.nav-storm a,
+.nav-storm span,
+.nav-storm p {
+  color: #fff2f2;
+}
+
 .bar-track {
   animation: fadeSlide 600ms ease both;
 }

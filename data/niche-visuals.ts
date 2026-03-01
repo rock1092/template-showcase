@@ -2,8 +2,11 @@ import { NicheSlug } from "@/types/template";
 
 export interface NicheVisualTheme {
   brandName: string;
+  brandTagline: string;
+  logoMark: string;
   announcement: string;
   navItems: [string, string, string];
+  navStyle: "luxury" | "industrial" | "technical" | "editorial" | "service" | "storm";
   headerMode: "solid" | "floating" | "minimal";
   heroMode: "immersive" | "split" | "stacked" | "magazine";
   quoteMode: "contrast" | "glass" | "stripe";
@@ -20,8 +23,11 @@ export interface NicheVisualTheme {
 export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   realtor: {
     brandName: "Urban Peak Realty",
+    brandTagline: "Private market strategy for premium listings",
+    logoMark: "UP",
     announcement: "New luxury inventory released this week",
     navItems: ["Listings", "Neighborhoods", "Sell Faster"],
+    navStyle: "luxury",
     headerMode: "floating",
     heroMode: "immersive",
     quoteMode: "glass",
@@ -36,8 +42,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   construction: {
     brandName: "North Forge Build",
+    brandTagline: "Commercial and residential execution at scale",
+    logoMark: "NF",
     announcement: "Preconstruction planning slots open for Q2",
     navItems: ["Build Process", "Portfolio", "Bid Request"],
+    navStyle: "industrial",
     headerMode: "solid",
     heroMode: "split",
     quoteMode: "contrast",
@@ -52,8 +61,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   hvac: {
     brandName: "Desert Air Pro",
+    brandTagline: "Precision climate performance for demanding homes",
+    logoMark: "DA",
     announcement: "24/7 emergency dispatch active tonight",
     navItems: ["Emergency Repair", "Maintenance", "Financing"],
+    navStyle: "technical",
     headerMode: "solid",
     heroMode: "split",
     quoteMode: "contrast",
@@ -68,8 +80,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   painting: {
     brandName: "Brightline Painting",
+    brandTagline: "Color architecture and finish craftsmanship",
+    logoMark: "BL",
     announcement: "Color strategy sessions available this month",
     navItems: ["Color Studio", "Case Studies", "Book Estimate"],
+    navStyle: "editorial",
     headerMode: "minimal",
     heroMode: "magazine",
     quoteMode: "stripe",
@@ -84,8 +99,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   plumbing: {
     brandName: "ClearFlow Plumbing",
+    brandTagline: "Urgent response with white-glove communication",
+    logoMark: "CF",
     announcement: "No dispatch fee for urgent leaks this week",
     navItems: ["Emergency", "Drain + Sewer", "Water Heater"],
+    navStyle: "service",
     headerMode: "floating",
     heroMode: "stacked",
     quoteMode: "glass",
@@ -100,8 +118,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   landscaping: {
     brandName: "Verdant Edge Co",
+    brandTagline: "Landscape direction for premium outdoor living",
+    logoMark: "VE",
     announcement: "Spring backyard transformations now booking",
     navItems: ["Design Build", "Maintenance", "Outdoor Living"],
+    navStyle: "editorial",
     headerMode: "minimal",
     heroMode: "magazine",
     quoteMode: "stripe",
@@ -116,8 +137,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   cleaning: {
     brandName: "Luminous Cleaning",
+    brandTagline: "Hotel-grade standards for homes and workplaces",
+    logoMark: "LC",
     announcement: "Recurring plans now include free deep reset",
     navItems: ["Home", "Commercial", "Recurring Plans"],
+    navStyle: "service",
     headerMode: "floating",
     heroMode: "stacked",
     quoteMode: "glass",
@@ -132,8 +156,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   electrical: {
     brandName: "VoltCraft Electric",
+    brandTagline: "Engineered power systems with safety-first delivery",
+    logoMark: "VC",
     announcement: "Panel upgrade crew ready for same-week installs",
     navItems: ["Panel Upgrades", "EV Charging", "Safety Checks"],
+    navStyle: "technical",
     headerMode: "solid",
     heroMode: "split",
     quoteMode: "contrast",
@@ -148,8 +175,11 @@ export const nicheVisuals: Record<NicheSlug, NicheVisualTheme> = {
   },
   roofing: {
     brandName: "Elevation Roofing",
+    brandTagline: "Storm-ready roof systems built for resilience",
+    logoMark: "ER",
     announcement: "Storm response line open now",
     navItems: ["Storm Damage", "Inspections", "Insurance Help"],
+    navStyle: "storm",
     headerMode: "solid",
     heroMode: "immersive",
     quoteMode: "contrast",
