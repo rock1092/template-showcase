@@ -89,3 +89,161 @@ h4 {
     opacity: 1;
   }
 }
+
+.demo-page {
+  position: relative;
+  isolation: isolate;
+}
+
+.demo-main {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-shell,
+.services-shell,
+.trust-shell,
+.testimonial-shell,
+.gallery-shell,
+.faq-shell,
+.quote-shell,
+.lead-shell {
+  position: relative;
+}
+
+.services-grid article,
+.gallery-grid article,
+.trust-grid > div,
+.testimonial-shell blockquote,
+.faq-shell details {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.services-grid article:hover,
+.gallery-grid article:hover,
+.trust-grid > div:hover,
+.testimonial-shell blockquote:hover,
+.faq-shell details:hover {
+  transform: translateY(-4px) rotateX(2deg);
+  box-shadow: 0 22px 40px -24px color-mix(in srgb, var(--brand) 55%, #0f2540 45%);
+}
+
+[data-slug="realtor"] {
+  background: radial-gradient(circle at 80% 8%, rgba(59, 130, 246, 0.16), transparent 28%), linear-gradient(180deg, #eef3ff 0%, #f7f9ff 60%, #eef4ff 100%);
+}
+
+[data-slug="realtor"] .hero-shell {
+  box-shadow: 0 30px 80px -40px rgba(30, 58, 138, 0.7);
+}
+
+[data-slug="construction"] {
+  background: linear-gradient(180deg, #fff3e3 0%, #fff8f0 55%, #fff1df 100%);
+}
+
+[data-slug="construction"] .hero-shell::after,
+[data-slug="roofing"] .hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -30% auto;
+  width: 320px;
+  height: 320px;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--brand) 65%, #ffffff 35%) 0 14px, transparent 14px 26px);
+  opacity: 0.26;
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+[data-slug="hvac"] {
+  background: radial-gradient(circle at 10% 15%, rgba(14, 165, 233, 0.2), transparent 24%), linear-gradient(180deg, #ebf8ff 0%, #f4fbff 55%, #e8f7ff 100%);
+}
+
+[data-slug="hvac"] .top-strip,
+[data-slug="electrical"] .top-strip {
+  letter-spacing: 0.18em;
+}
+
+[data-slug="painting"] {
+  background: linear-gradient(180deg, #fff3f8 0%, #fff9fc 52%, #ffedf7 100%);
+}
+
+[data-slug="painting"] .hero-shell,
+[data-slug="landscaping"] .hero-shell {
+  overflow: hidden;
+}
+
+[data-slug="painting"] .hero-shell::before,
+[data-slug="landscaping"] .hero-shell::before {
+  content: "";
+  position: absolute;
+  inset: -50px auto auto -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 36% 64% 58% 42% / 52% 46% 54% 48%;
+  background: color-mix(in srgb, var(--accent) 48%, #ffffff 52%);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+[data-slug="painting"] .services-grid article:nth-child(2) {
+  transform: rotate(-1.2deg);
+}
+
+[data-slug="plumbing"] {
+  background: radial-gradient(circle at 90% 12%, rgba(37, 99, 235, 0.18), transparent 22%), linear-gradient(180deg, #eef6ff 0%, #f8fbff 62%, #eaf4ff 100%);
+}
+
+[data-slug="plumbing"] .quote-shell > div,
+[data-slug="cleaning"] .quote-shell > div {
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--brand) 24%, #ffffff 76%);
+}
+
+[data-slug="landscaping"] {
+  background: radial-gradient(circle at 8% 7%, rgba(22, 163, 74, 0.2), transparent 26%), linear-gradient(180deg, #edfcf2 0%, #f8fdf9 54%, #e8f9ef 100%);
+}
+
+[data-slug="landscaping"] .services-grid article {
+  border-radius: 1.7rem 1rem 1.6rem 0.95rem;
+}
+
+[data-slug="cleaning"] {
+  background: radial-gradient(circle at 86% 7%, rgba(14, 165, 164, 0.16), transparent 22%), linear-gradient(180deg, #edffff 0%, #f8ffff 60%, #e7fbfd 100%);
+}
+
+[data-slug="cleaning"] .hero-shell::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed color-mix(in srgb, var(--brand) 35%, #ffffff 65%);
+  border-radius: calc(var(--radius-card) + 0.15rem);
+  pointer-events: none;
+}
+
+[data-slug="electrical"] {
+  background: linear-gradient(180deg, #efe9ff 0%, #f9f6ff 55%, #ede6ff 100%);
+}
+
+[data-slug="electrical"] .hero-shell,
+[data-slug="roofing"] .hero-shell {
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--brand) 30%, #ffffff 70%);
+}
+
+[data-slug="electrical"] .services-grid article:nth-child(1),
+[data-slug="electrical"] .services-grid article:nth-child(3) {
+  transform: perspective(900px) rotateY(-6deg);
+}
+
+[data-slug="roofing"] {
+  background: linear-gradient(180deg, #fff0f0 0%, #fff8f8 58%, #ffecec 100%);
+}
+
+[data-slug="roofing"] .nav-shell,
+[data-slug="construction"] .nav-shell,
+[data-slug="electrical"] .nav-shell {
+  box-shadow: 0 16px 34px -24px color-mix(in srgb, var(--brand) 55%, #111827 45%);
+}
+
+[data-slug="roofing"] .trust-grid > div {
+  border-left: 4px solid var(--brand);
+}

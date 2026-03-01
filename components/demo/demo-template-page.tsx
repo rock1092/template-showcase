@@ -25,17 +25,17 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
   } as CSSProperties;
 
   return (
-    <div style={themedVars} className="min-h-screen" data-variant={theme.heroMode}>
+    <div style={themedVars} className="demo-page min-h-screen" data-variant={theme.heroMode} data-slug={template.slug}>
       <div
-        className="border-b border-white/30 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white"
+        className="top-strip border-b border-white/30 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white"
         style={{ background: `linear-gradient(90deg, ${theme.brandStrong}, ${theme.brand})` }}
       >
         {theme.announcement}
       </div>
 
-      <main className="page-shell pb-28 pt-6 md:pb-16">
+      <main className="page-shell demo-main pb-28 pt-6 md:pb-16">
         <nav
-          className={`mb-8 flex items-center justify-between px-4 py-3 sm:px-6 ${
+          className={`nav-shell mb-8 flex items-center justify-between px-4 py-3 sm:px-6 ${
             theme.headerMode === "floating"
               ? "glass-panel sticky top-4 z-30 rounded-[var(--radius-pill)]"
               : theme.headerMode === "solid"
@@ -59,7 +59,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
         </nav>
 
         {theme.heroMode === "immersive" ? (
-          <section className="relative overflow-hidden rounded-[calc(var(--radius-card)+0.6rem)] border border-white/50 bg-white/70">
+          <section className="hero-shell relative overflow-hidden rounded-[calc(var(--radius-card)+0.6rem)] border border-white/50 bg-white/70">
             <div className="relative h-[460px] w-full">
               <Image src={heroPhoto.url} alt={heroPhoto.alt} fill className="object-cover" sizes="100vw" unoptimized priority />
               <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/45 to-transparent" />
@@ -81,7 +81,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
             </div>
           </section>
         ) : theme.heroMode === "magazine" ? (
-          <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+          <section className="hero-shell grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="surface-card rounded-[var(--radius-card)] p-7 sm:p-10">
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-strong">{template.city}</p>
               <h1 className="mt-4 text-4xl font-semibold leading-[1.02] sm:text-6xl">{template.heroTitle}</h1>
@@ -108,7 +108,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
             </div>
           </section>
         ) : theme.heroMode === "stacked" ? (
-          <section className="space-y-5 rounded-[calc(var(--radius-card)+0.3rem)] border border-line bg-white p-6 sm:p-9">
+          <section className="hero-shell space-y-5 rounded-[calc(var(--radius-card)+0.3rem)] border border-line bg-white p-6 sm:p-9">
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-strong">{template.niche} conversion system</p>
@@ -140,7 +140,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
             </div>
           </section>
         ) : (
-          <section className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <section className="hero-shell grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div className="rounded-[var(--radius-card)] border border-brand/25 bg-gradient-to-br from-white to-brand/10 p-7 sm:p-10">
               <p className="inline-flex rounded-full bg-brand/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-brand-strong">
                 {template.niche} - {template.city}
@@ -164,9 +164,9 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </section>
         )}
 
-        <section id="services" className="mt-14 space-y-6">
+        <section id="services" className="services-shell mt-14 space-y-6">
           <SectionTitle kicker="Services" title={`Signature ${template.niche} Offer Stack`} description="Same conversion logic. Distinct look, mood, and layout behavior." />
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="services-grid grid gap-4 md:grid-cols-3">
             {template.services.map((service, index) => (
               <article
                 key={service.title}
@@ -185,9 +185,9 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </div>
         </section>
 
-        <section className="mt-14 space-y-6">
+        <section className="trust-shell mt-14 space-y-6">
           <SectionTitle kicker="Trust" title="Credibility Layer" />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="trust-grid grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {template.trustBadges.map((badge, index) => (
               <div
                 key={badge}
@@ -206,7 +206,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </div>
         </section>
 
-        <section className="mt-14 space-y-6">
+        <section className="testimonial-shell mt-14 space-y-6">
           <SectionTitle kicker="Testimonials" title="Client-Led Credibility" />
           <div className="grid gap-4 md:grid-cols-2">
             {template.testimonials.map((item) => (
@@ -220,9 +220,9 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </div>
         </section>
 
-        <section id="gallery" className="mt-14 space-y-6">
+        <section id="gallery" className="gallery-shell mt-14 space-y-6">
           <SectionTitle kicker="Before & After" title="Project Outcome Gallery" />
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="gallery-grid grid gap-4 md:grid-cols-2">
             {template.beforeAfter.map((item, index) => {
               const beforePhoto = workPhotos[(index * 2) % workPhotos.length];
               const afterPhoto = workPhotos[(index * 2 + 1) % workPhotos.length] || altPhoto;
@@ -256,7 +256,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </div>
         </section>
 
-        <section id="faq" className="mt-14 space-y-6">
+        <section id="faq" className="faq-shell mt-14 space-y-6">
           <SectionTitle kicker="FAQ" title="Final Buying Questions" />
           <div className="space-y-3">
             {template.faq.map((item) => (
@@ -268,7 +268,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           </div>
         </section>
 
-        <section className="mt-14">
+        <section className="quote-shell mt-14">
           {theme.quoteMode === "contrast" ? (
             <div className="rounded-[var(--radius-card)] p-8 text-white" style={{ background: `linear-gradient(120deg, ${theme.brandStrong}, ${theme.brand})` }}>
               <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/80">Request Quote Fast</p>
@@ -287,7 +287,7 @@ export function DemoTemplatePage({ template, theme, workPhotos }: DemoTemplatePa
           )}
         </section>
 
-        <section id="lead-form" className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+        <section id="lead-form" className="lead-shell mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-4">
             <SectionTitle kicker="Get Started" title="Capture Qualified Leads" description="This quote section is deliberately unique per niche while reusing one conversion data model." />
             <div className="surface-card rounded-[var(--radius-card)] p-5 text-sm text-muted">
